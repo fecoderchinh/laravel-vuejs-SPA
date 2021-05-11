@@ -1,5 +1,5 @@
 {
-    "name": "inc-connect",
+    "name": "fecoder/inc-connect",
     "description": "A Laravel-Vue SPA starter project template with Tailwind CSS integration.",
     "keywords": ["spa", "laravel", "vue"],
     "license": "MIT",
