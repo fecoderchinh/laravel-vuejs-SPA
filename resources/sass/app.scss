@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '~sweetalert2/src/sweetalert2';
+@import 'default';
+
+@import 'font-family.scss';
+@import 'reset.scss';
+@import 'custom.scss';
+@import 'breadcrumbs.scss';
+
+body {
+  @apply text-base leading-normal font-normal;
+  font-family: 'Libre Franklin', sans-serif;
+  @media (max-width: 992px) {
+    @apply leading-tight;
+  }
+}

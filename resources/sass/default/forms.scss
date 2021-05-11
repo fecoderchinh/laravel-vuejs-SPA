@@ -1,0 +1,32 @@
+.form-input.invalid {
+  @apply bg-red-100 text-red-500 border-red-500;
+}
+
+.tc-button {
+  @apply rounded-sm px-4 py-2 my-2;
+  &.tc-button {
+    // .tc-button__transition
+    &__transition {
+      @apply transition transition-all duration-150 ease-linear;
+    }
+    // .tc-button__primary
+    &__primary {
+      // .tc-button__fill
+      &.tc-button__fill {
+        @apply bg-indigo-500 text-white;
+      }
+      @apply border border-indigo-500 text-indigo-500 select-none;
+      &:hover,
+      &:focus {
+        @apply bg-indigo-600 text-white;
+      }
+      &:focus {
+        @apply outline-none shadow-outline;
+      }
+    }
+  }
+}
+
+.tc-input {
+  @apply block w-full py-1 px-3 text-current bg-white bg-clip-padding border appearance-none rounded;
+}

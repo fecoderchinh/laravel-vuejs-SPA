@@ -1,0 +1,38 @@
+.container {
+  @apply mx-auto;
+}
+
+/*
+* OVERLAY
+*/
+@media only screen and (max-width: 1023px) {
+  .overlay:after {
+    @apply top-16 block h-full left-0 inset-x-0 fixed;
+    content: " ";
+    z-index: 29;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/*
+* WEBKIT SCROLLBAR
+*/
+.cms-scrollbar {
+  scrollbar-color: grey #eee;
+  scrollbar-width: thin;
+}
+.cms-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.cms-scrollbar::-webkit-scrollbar-track {
+  @apply bg-gray-200;
+  border-radius: 10px;
+}
+.cms-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-400;
+  border-radius: 10px;
+}
+.cms-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}

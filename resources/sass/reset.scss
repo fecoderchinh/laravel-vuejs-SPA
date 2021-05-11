@@ -1,0 +1,99 @@
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled),
+button:not(:disabled) {
+  @apply cursor-pointer;
+}
+button, input {
+  &:focus {
+    @apply shadow outline-none #{#{!important}};
+  }
+}
+
+/***********************************************************************************\
+      MISCELLANEOUS
+\***********************************************************************************/
+.no-m {
+  @apply m-0 #{!important};
+}
+.no-mt {
+  @apply mt-0 #{!important};
+}
+.no-mr {
+  @apply mr-0 #{!important};
+}
+.no-mb {
+  @apply mb-0 #{!important};
+}
+.no-ml {
+  @apply ml-0 #{!important};
+}
+.no-mx {
+  @apply mx-0 #{!important};
+}
+.no-my {
+  @apply my-0 #{!important};
+}
+.no-p {
+  @apply p-0 #{!important};
+}
+.no-pt {
+  @apply pt-0 #{!important};
+}
+.no-pr {
+  @apply pr-0 #{!important};
+}
+.no-pb {
+  @apply pb-0 #{!important};
+}
+.no-pl {
+  @apply pl-0 #{!important};
+}
+.no-px {
+  @apply px-0 #{!important};
+}
+.no-py {
+  @apply py-0 #{!important};
+}
+.no-rounded {
+  @apply rounded-none #{!important};
+}
+.no-rounded-tl {
+  @apply rounded-tl-none #{!important};
+}
+.no-rounded-tr {
+  @apply rounded-tr-none #{!important};
+}
+.no-rounded-br {
+  @apply rounded-br-none #{!important};
+}
+.no-rounded-bl {
+  @apply rounded-bl-none #{!important};
+}
+.no-rounded-t {
+  @apply rounded-t-none #{!important};
+}
+.no-rounded-r {
+  @apply rounded-r-none #{!important};
+}
+.no-rounded-b {
+  @apply rounded-b-none #{!important};
+}
+.no-rounded-l {
+  @apply rounded-l-none #{!important};
+}
+.no-b {
+  @apply border-0 #{!important};
+}
+.no-b-t {
+  @apply border-t-0 #{!important};
+}
+.no-b-r {
+  @apply border-r-0 #{!important};
+}
+.no-b-b {
+  @apply border-b-0 #{!important};
+}
+.no-b-l {
+  @apply border-l-0 #{!important};
+}

@@ -1,0 +1,21 @@
+.breadcrumb {
+  @apply flex flex-wrap py-3 list-none mt-0 mb-3 text-sm;
+  &-item {
+    a {
+      @apply font-normal text-blue-500 no-underline;
+      &:hover, &:focus {
+        @apply text-blue-700;
+      }
+    }
+    + .breadcrumb-item {
+      @apply pl-2;
+      &:before {
+        @apply inline-block text-gray-900 pr-2;
+        content: '/ ';
+      }
+      span {
+        @apply text-black;
+      }
+    }
+  }
+}
