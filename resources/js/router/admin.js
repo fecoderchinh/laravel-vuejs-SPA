@@ -122,6 +122,23 @@ export default [
             name: 'admin.comments.index'
           }
         ]
+      },
+      {
+        path: 'users',
+        component: helpers.page('admin/users/index.vue'),
+        meta: {
+          breadcrumb: 'All Users'
+        },
+        children: [
+          {
+            path: '', redirect: { name: 'admin.users.index' }
+          },
+          {
+            path: '/',
+            component: helpers.page('admin/users/AllUsers.vue'),
+            name: 'admin.users.index'
+          }
+        ]
       }
     ]
   }

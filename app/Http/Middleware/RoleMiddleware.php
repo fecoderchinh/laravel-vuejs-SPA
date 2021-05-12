@@ -14,20 +14,20 @@ class RoleMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role, $permission = null)
+    public function handle($request, Closure $next, ...$roles)
     {
-        if(!$request->user()->hasRole($role)) {
+        if (!\Auth::check()) // I included this check because you have it, but it really should be part of your 'auth' middleware, most likely added as part of a route group.
+            return response()->json(["data" => "Unauthorized."], 401);
 
-            abort(404);
+        $user = \Auth::user();
 
-        }
+        if($user->isAdmin())
+            return $next($request);
 
-        if($permission !== null && !$request->user()->can($permission)) {
+        // Check if user has the role This check will depend on how your roles are set up
+        if($user->hasRole($roles))
+            return $next($request);
 
-            abort(404);
-        }
-
-        return $next($request);
-
+        return response()->json(["data" => "Unauthorized."], 401);
     }
 }

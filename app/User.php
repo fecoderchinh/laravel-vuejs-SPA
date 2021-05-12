@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+
 class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
 {
     use Notifiable, HasPermissionsTrait, HasFactory;
@@ -49,7 +50,8 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
      */
     protected $appends = [
         'photo_url',
-        'roles'
+        'roles',
+        'permissions'
     ];
 
     /**
@@ -69,7 +71,12 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
      */
     public function getRolesAttribute()
     {
-        return $this->roles()->first();
+        return $this->roles()->get();
+    }
+
+    public function getPermissionsAttribute()
+    {
+        return $this->permissions()->get();
     }
 
     /**
@@ -122,5 +129,9 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function comments()
     {
         return $this->hasMany(Comment::class)->latest();
+    }
+
+    public function isAdmin() {
+        return !!($this->hasRole(['admin']));
     }
 }

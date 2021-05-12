@@ -14,14 +14,15 @@ class UserController extends Controller
     }
 
     public function index(Request $request) {
-        if ($request->user()->can('view-users')) {
-            return response()->json(User::all());
-        }
+//        if ($request->user()->can('edit-users')) {
+//            return response()->json(User::all());
+//        }
 
-        return response([
-            'status' => false,
-            'message' => 'You don\'t have permission to view users!'
-        ], 200);
+        $users = \DB::table('users_roles')
+            ->join('users', 'users.id', '=', 'users_roles.user_id')
+            ->join('roles', 'roles.id', '=', 'users_roles.role_id')
+            ->get();
+        return response()->json(["data" => $users]);
     }
 
     /**

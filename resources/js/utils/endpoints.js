@@ -7,3 +7,5 @@ export const TAGS_BY_USER = '/api/tags/all'
 export const COMMENTS = '/api/comments'
 export const COMMENTS_BY_USER = '/api/comments/all'
 export const SETTINGS = '/api/settings'
+
+export const USERS = '/api/users'

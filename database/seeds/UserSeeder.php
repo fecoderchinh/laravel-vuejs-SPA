@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $admin_permission = Permission::whereIn('slug', [
             'create-tasks',
             'edit-users'
-        ])->first();
+        ])->get();
         $company_permission = Permission::where('slug','create-tasks')->first();
         $supplier_permission = Permission::where('slug', 'post-comments')->first();
 
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         $admin_role->slug = 'admin';
         $admin_role->name = 'Admin';
         $admin_role->save();
-        $admin_role->permissions()->attach($admin_permission);
+        $admin_role->permissions()->sync($admin_permission);
 
         //RoleTableSeeder.php
         $company_role = new Role();
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
         $supplier_role->save();
         $supplier_role->permissions()->attach($supplier_permission);
 
-        $admin_role = Role::where('slug','company')->first();
+        $admin_role = Role::where('slug','admin')->first();
         $company_role = Role::where('slug','company')->first();
         $supplier_role = Role::where('slug', 'supplier')->first();
 
@@ -71,7 +71,7 @@ class UserSeeder extends Seeder
         $admin_permission_new = Permission::whereIn('slug', [
             'create-tasks',
             'edit-users'
-        ])->first();
+        ])->get();
         $company_permission_new = Permission::where('slug','create-tasks')->first();
         $supplier_permission_new = Permission::where('slug', 'post-comments')->first();
 
@@ -81,7 +81,7 @@ class UserSeeder extends Seeder
         $admin->password = bcrypt('789512364');
         $admin->save();
         $admin->roles()->attach($admin_role_new);
-        $admin->permissions()->attach($admin_permission_new);
+        $admin->permissions()->sync($admin_permission_new);
 
         $company = new User();
         $company->name = 'John Doe';

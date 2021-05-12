@@ -43,14 +43,10 @@ trait HasPermissionsTrait {
         return false;
     }
 
-    public function hasRole( ... $roles ) {
+    public function hasRole( array $roles ) {
 
-        foreach ($roles as $role) {
-            if ($this->roles->contains('slug', $role)) {
-                return true;
-            }
-        }
-        return false;
+        return !!(Role::whereIn('slug', $roles));
+
     }
 
     public function roles() {

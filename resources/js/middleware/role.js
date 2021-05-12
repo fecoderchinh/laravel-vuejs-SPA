@@ -7,17 +7,14 @@ import store from '~/store'
  */
 
 export default (to, from, next, roles) => {
-  // Grab the user
-  const user = store.getters['auth/roles']
-
-  // console.log(store.getters['auth/roles'].slug)
 
   // Split roles into an array
-  roles = roles.split(',')
+  roles = roles.split(',').map(val => val.trim())
 
   // Check if the user has one of the required roles...
-  if (!roles.includes(user.slug)) {
-    next('/unauthorized')
+  if (!roles.includes(...store.getters['auth/user'].roles.map(role => role.slug))) {
+    alert('You don\'t have permission to access!')
+    next({ name: 'welcome' })
   }
 
   next()
