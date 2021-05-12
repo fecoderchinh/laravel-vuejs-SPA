@@ -106,6 +106,29 @@ export default {
       ]
     }
   },
+  created () {
+    if (
+      this.$store.getters['auth/check'] &&
+      this.$store.getters['auth/user'].data.roles
+        .map(role => role.slug)
+        .map(role => role)
+        .some(role => ('admin').includes(role))
+    ) {
+      var user = {
+        item: 'Người dùng',
+        url: '#',
+        component: 'carret-svg',
+        subMenu: [
+          {
+            subItem: 'Quản lý người dùng',
+            subUrl: 'admin.users.index',
+            subComponent: 'user-svg'
+          }
+        ]
+      }
+      this.menuData.push(user)
+    }
+  },
   methods: {
     classSingleItem (index) {
       let str = ''

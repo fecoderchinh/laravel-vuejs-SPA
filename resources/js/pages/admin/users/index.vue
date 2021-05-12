@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  // middleware: ['auth', 'role:admin, company', 'permission: edit-users'],
+  // middleware: ['auth', 'role:admin', 'permission: edit-users'],
   middleware: ['auth', 'role:admin'],
   layout: 'admin'
 }
