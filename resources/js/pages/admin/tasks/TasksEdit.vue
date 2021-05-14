@@ -191,6 +191,7 @@ export default {
           })
         })
         .catch((error) => {
+          this.loading = false
           // console.log(error)
           if (error.response.data.errors) {
             this.errors.record(error.response.data.errors)

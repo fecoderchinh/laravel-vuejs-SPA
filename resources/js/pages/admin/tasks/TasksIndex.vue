@@ -57,6 +57,7 @@ export default {
         .then(({ data: tasks }) => {
           this.pagination = tasks.meta
           // this.tasks = tasks.data
+          console.log(tasks)
           this.$store.dispatch('task/fetchAllTasks', tasks.data)
         })
         .catch(error => {

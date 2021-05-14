@@ -123,7 +123,33 @@
       </box>
     </div>
 
-<!--    {{ data.lastestUsers }}-->
+    <div class="w-full mt-5">
+      <h3 class="mb-5">
+        New members
+      </h3>
+      <box v-if="data.lastestUsers.length > 0">
+        <v-table>
+          <thead>
+          <tr>
+            <th scope="col">
+              #
+            </th>
+            <th scope="col">
+              Name
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="(post, index) in data.lastestUsers" :key="index">
+            <th scope="row">
+              {{ index+1 }}
+            </th>
+            <td>{{ post.name }}</td>
+          </tr>
+          </tbody>
+        </v-table>
+      </box>
+    </div>
   </div>
 </template>
 

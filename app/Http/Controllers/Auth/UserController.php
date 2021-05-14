@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Role;
+use App\Task;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -39,5 +40,21 @@ class UserController extends Controller
     {
 //        return response()->json($request->user());
         return new UserResource($request->user());
+    }
+
+    public function destroy(User $user)
+    {
+        if($user->id !== \Auth::user()->id)
+        {
+            $user->delete();
+
+            Task::with('users')->where('id', '=', $user->id)->delete();
+
+            return response()->json(['data', 'Success deleted!'], 204);
+        }
+        else
+        {
+            return response()->json(['data', 'Unauthorized.'], 401);
+        }
     }
 }

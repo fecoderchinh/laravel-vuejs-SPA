@@ -16,6 +16,11 @@ export const mutations = {
   FETCH_USERS (state, users) {
     state.users = users
     return state.users
+  },
+  DETELE_USER (state, payload) {
+    state.users = state.users.filter((user, index) => {
+      return user.id !== payload.id
+    })
   }
 }
 
@@ -27,5 +32,11 @@ export const actions = {
         store.commit('FETCH_USERS', comments.data)
       })
       .catch(error => console.log(error))
+  },
+  deleteUser (store, payload) {
+    return new Promise((resolve, reject) => {
+      store.commit('DETELE_USER', payload)
+      resolve()
+    })
   }
 }

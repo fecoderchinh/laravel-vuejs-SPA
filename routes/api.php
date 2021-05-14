@@ -17,6 +17,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('logout', 'Auth\LoginController@logout');
 
     Route::get('/user', 'Auth\UserController@current');
+    Route::delete('/users/{user}', 'Auth\UserController@destroy');
     Route::get('/users', 'Auth\UserController@index')->middleware(['role:admin', 'role:company']);
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');

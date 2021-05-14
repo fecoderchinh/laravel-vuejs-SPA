@@ -18,8 +18,7 @@ class DashboardController extends Controller
 
         $popularTasks = Task::with('category')->orderBy('visits', 'DESC')->take(5)->get();
         $latestComments = Comment::with('task')->take(5)->get();
-//        $lastestUsers = User::take(5)->get();
-        $lastestUsers = 'list new users';
+        $lastestUsers = User::where('id', '<>', 1)->take(5)->get();
 
         return response()->json([
             'data' => compact('tasksCount', 'commentsCount', 'viewsCount', 'popularTasks', 'latestComments', 'lastestUsers')
