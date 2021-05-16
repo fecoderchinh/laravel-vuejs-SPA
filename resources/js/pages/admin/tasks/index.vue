@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  middleware: 'auth',
+  middleware: ['auth', 'permission:create-tasks'],
   layout: 'admin'
 }
 </script>

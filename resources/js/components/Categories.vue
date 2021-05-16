@@ -16,7 +16,7 @@
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody v-if="categories.length > 0">
       <tr v-for="(category, index) in categories" :key="index">
         <th scope="row">
           {{ index + 1 }}
@@ -107,11 +107,11 @@ export default {
                 'success'
               )
             })
-            .catch(() => {
+            .catch((error) => {
               Swal.fire({
                 type: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!',
+                text: error.response.data.msg,
                 footer: '<a href>Why do I have this issue?</a>'
               })
             })

@@ -119,6 +119,9 @@ export default {
         email: this.email,
         password: this.password
       })
+        .catch((error) => {
+          this.loading = false
+        })
       // Save the token.
       this.$store.dispatch('auth/saveToken', {
         token: data.token,

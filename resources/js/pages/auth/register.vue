@@ -1,5 +1,10 @@
 <template>
   <div class="container min-h-screen mt-5">
+    <card v-if="mustVerifyEmail" :title="$t('register')">
+      <div class="alert alert-success" role="alert">
+        {{ $t('verify_email_address') }}
+      </div>
+    </card>
     <div class="grid grid-col-6">
       <div class="col-span-3 mx-auto text-center">
         <h1 class="text-4xl font-bold text-gray-800 mb-1 tracking-tight">

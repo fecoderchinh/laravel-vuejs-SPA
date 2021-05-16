@@ -24,7 +24,8 @@
           <dropdown-menu v-if="user" class="tc-navbar__nav ml-auto">
             <div class="flex">
               <div class="my-auto bg-gray-200 mr-3 rounded-full border-2 border-gray-200 overflow-hidden select-none">
-                <img :src="user.photo_url" class="select-none h-6" :alt="user.name">
+<!--                <img :src="user.photo_url" class="select-none h-6" :alt="user.name">-->
+                <user-svg class="w-4"></user-svg>
               </div>
               <div class="my-auto mr-4">
                 <p class="font-semibold leading-none tracking-wide">

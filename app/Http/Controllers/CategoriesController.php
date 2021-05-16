@@ -17,8 +17,16 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $categories = Category::latest()->paginate(10);
+        $categories = Category::whereHas('tasks', function ($query) {
+            $query->where('user_id', '=', \Auth::id());
+        })->latest()->paginate(10);
         return CategoryResource::collection($categories);
+//        $categories = \DB::table('categories')
+//            ->join('tasks', 'tasks.category_id', 'categories.id')
+//            ->where('tasks.user_id', '=', \Auth::user()->id)
+//            ->paginate(10);
+//
+//        return response()->json(["data" => $categories]);
     }
 
     public function all()
@@ -55,8 +63,10 @@ class CategoriesController extends Controller
     {
         $request->validate([ "name" => "required|max:255"]);
 
-        if($request->name !== $category->name) {
+        if($request->name !== $category->name && $category->slug !== 'uncategorized') {
             $request->validate(["name" => "unique:categories"]);
+        } else {
+            return response()->json(['msg'=> 'The default record can not be changed.'], 500);
         }
 
         $category->update([
@@ -69,8 +79,18 @@ class CategoriesController extends Controller
 
     public function destroy(Category $category)
     {
-        $category->delete();
-        return response()->json([], 204);
+        if(\Auth::id() === 1) {
+            if($category->slug !== 'uncategorized')
+            {
+                $category->delete();
+//                $category->tasks()->with('categories')->where('slug', '=', $category->slug)->update(['slug' => 'uncategorized']);
+                return response()->json([], 204);
+            } else {
+                return response()->json(['msg'=> 'The default record can not be removed.'], 500);
+            }
+        } else {
+            return response()->json(['msg'=> 'You don\'t have permission to delete category.'], 500);
+        }
     }
 
     public function getTasks(Category $category)

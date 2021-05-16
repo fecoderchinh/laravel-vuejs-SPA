@@ -57,6 +57,8 @@
 
 <script>
 import TagsModal from '~/components/modals/TagsModal'
+import helpers from '~/utils/helpers'
+
 export default {
   data () {
     return {
@@ -66,30 +68,6 @@ export default {
           url: 'admin.dashboard',
           component: 'dashboard-svg',
           subMenu: []
-        },
-        {
-          item: 'Đơn hàng',
-          url: '#',
-          component: 'carret-svg',
-          subMenu: [
-            {
-              subItem: 'Tất cả đơn hàng',
-              subUrl: 'admin.tasks.index',
-              subComponent: 'file-check-svg'
-            },
-            {
-              subItem: 'Bình luận',
-              subUrl: 'admin.comments.index',
-              subComponent: 'comment-svg'
-            },
-            {
-              subItem: 'Từ khóa',
-              subUrl: 'admin.tags.index',
-              subComponent: 'tags-svg',
-              modal: TagsModal,
-              modalW: 720
-            }
-          ]
         },
         {
           item: 'Danh mục',
@@ -102,18 +80,46 @@ export default {
               subComponent: 'folder-svg'
             }
           ]
+        },
+        {
+          item: 'Bình luận',
+          url: '#',
+          component: 'carret-svg',
+          subMenu: [
+            {
+              subItem: 'Bình luận',
+              subUrl: 'admin.comments.index',
+              subComponent: 'comment-svg'
+            }
+          ]
         }
       ]
     }
   },
   created () {
-    if (
-      this.$store.getters['auth/check'] &&
-      this.$store.getters['auth/user'].data.roles
-        .map(role => role.slug)
-        .map(role => role)
-        .some(role => ('admin').includes(role))
-    ) {
+    if (helpers.can('create-tasks')) {
+      var tasks = {
+        item: 'Đơn hàng',
+        url: '#',
+        component: 'carret-svg',
+        subMenu: [
+          {
+            subItem: 'Tất cả đơn hàng',
+            subUrl: 'admin.tasks.index',
+            subComponent: 'file-check-svg'
+          },
+          {
+            subItem: 'Từ khóa',
+            subUrl: 'admin.tags.index',
+            subComponent: 'tags-svg',
+            modal: TagsModal,
+            modalW: 720
+          }
+        ]
+      }
+      this.menuData.push(tasks)
+    }
+    if (helpers.is('admin')) {
       var user = {
         item: 'Người dùng',
         url: '#',

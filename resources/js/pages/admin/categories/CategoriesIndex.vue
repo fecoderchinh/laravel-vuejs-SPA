@@ -15,7 +15,7 @@
     <div class="w-full mt-5">
       <box>
         <categories :categories="this.categories" />
-        <pagination :meta="pagination" @changed="paginate" />
+        <pagination v-if="categories.length > 0" :meta="pagination" @changed="paginate" />
       </box>
     </div>
   </div>
@@ -61,7 +61,7 @@ export default {
       cats.all(endpoint)
         .then(({ data: categories }) => {
           this.pagination = categories.meta
-          // this.tasks = tasks.data
+          // console.log(categories.data)
           this.$store.dispatch('categories/fetchAllCategories', categories.data)
         })
         .catch(error => {
