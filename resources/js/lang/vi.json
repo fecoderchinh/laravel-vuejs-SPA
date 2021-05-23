@@ -77,5 +77,6 @@
   "online_status": "Đăng lên trang chủ",
   "title": "Tiêu đề",
   "please_enter_tag": "Vui lòng nhập từ khóa, phân biệt bằng dấu phẩy.",
-  "added_tags": "từ khóa được thêm vào:"
+  "added_tags": "từ khóa được thêm vào:",
+  "register_success": "Đăng ký thành công!"
 }

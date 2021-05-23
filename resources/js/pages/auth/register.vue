@@ -110,6 +110,7 @@
 import { mapGetters } from 'vuex'
 import axios from 'axios'
 import Errors from '~/utils/Errors'
+import i18n from '~/plugins/i18n'
 
 export default {
   middleware: 'guest',
@@ -154,6 +155,12 @@ export default {
           this.loading = false
           // console.log(error.response)
           if (error.response.status === 422) {
+            // display error notification
+            this.$notify({
+              title: `Error!`,
+              text: error.response.data.message,
+              type: 'error'
+            })
             this.errors.record(error.response.data.errors)
           }
         })
@@ -164,6 +171,12 @@ export default {
       } else {
         // Log in the user.
         this.loading = false
+        // display success notification
+        this.$notify({
+          title: `Success!`,
+          text: i18n.t('register_success'),
+          type: 'success'
+        })
         const { data: { token } } = await axios.post('/api/login', {
           email: this.email,
           password: this.password

@@ -79,5 +79,6 @@
   "online_status": "Online Status",
   "title": "Title",
   "please_enter_tag": "Please enter your data, seperated by commas",
-  "added_tags": "tags added:"
+  "added_tags": "tags added:",
+  "register_success": "Sign Up Success!"
 }
