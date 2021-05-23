@@ -83,7 +83,7 @@ class LoginController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'credentials' => [trans('auth.failed')]
+            'credentials' => trans('auth.failed')
         ]);
     }
 

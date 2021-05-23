@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed'   => 'Estas credenciales no coinciden con nuestros registros.',
-    'throttle' => 'Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos.',
+    'failed' => 'Email hoặc mật khẩu không đúng.',
+    'throttle' => 'Thao tác đăng nhập quá nhiều. Vui lòng thử lại sau :seconds giây.',
 
 ];

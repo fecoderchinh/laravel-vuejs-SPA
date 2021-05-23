@@ -83,6 +83,8 @@ import Cookies from 'js-cookie'
 import LoginWithGithub from '~/components/LoginWithGithub'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
+import Errors from '~/utils/Errors'
+
 export default {
   components: {
     LoginWithGithub,
@@ -102,7 +104,8 @@ export default {
     password: '',
     remember: false,
     loading: false,
-    fromRoute: null
+    fromRoute: null,
+    errors: new Errors()
   }),
 
   beforeRouteEnter (to, from, next) {
@@ -120,10 +123,20 @@ export default {
         password: this.password
       })
         .catch((error) => {
+          // console.log(error.response)
           this.loading = false
+          if (error.response.status === 422) {
+            this.errors.record(error.response.data.errors)
+            // display error notification
+            this.$notify({
+              title: `Error!`,
+              text: error.response.data.errors.credentials[0],
+              type: 'error'
+            })
+          }
         })
       // Save the token.
-      this.$store.dispatch('auth/saveToken', {
+      await this.$store.dispatch('auth/saveToken', {
         token: data.token,
         remember: this.remember
       })
