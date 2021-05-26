@@ -51,7 +51,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import cats from '~/utils/requests'
-import { CATEGORIES } from '~/utils/endpoints'
+import { CATEGORIES_ALL } from '~/utils/endpoints'
 
 export default {
   name: 'Sidebar',
@@ -79,18 +79,19 @@ export default {
       cats.all(endpoint)
         .then(({ data: categories }) => {
           // this.tasks = tasks.data
+          // console.log(categories)
           this.$store.dispatch('categories/fetchAllCategories', categories.data)
         })
         .catch(error => {
           this.$notify({
             title: `Error loading categories`,
-            text: error.response.data.message,
+            text: error.response,
             type: 'error'
           })
         })
     },
     getEndpoint (page = null) {
-      return page !== null ? `${CATEGORIES}?page=${page}` : CATEGORIES
+      return page !== null ? `${CATEGORIES_ALL}?page=${page}` : CATEGORIES_ALL
     }
   }
 }

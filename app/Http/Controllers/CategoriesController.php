@@ -17,9 +17,12 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $categories = Category::whereHas('tasks', function ($query) {
+//        $categories = Category::whereHas('tasks', function ($query) {
+//            $query->where('user_id', '=', \Auth::id());
+//        })->latest()->paginate(10);
+        $categories = \Auth::id() != 1 ? Category::whereHas('tasks', function ($query) {
             $query->where('user_id', '=', \Auth::id());
-        })->latest()->paginate(10);
+        })->latest()->paginate(10) : Category::latest()->paginate(10);
         return CategoryResource::collection($categories);
 //        $categories = \DB::table('categories')
 //            ->join('tasks', 'tasks.category_id', 'categories.id')
@@ -31,7 +34,12 @@ class CategoriesController extends Controller
 
     public function all()
     {
-        $categories = Category::latest()->get();
+//        $categories = Category::latest()->get()->each(function ($category, $key) {
+//            $category->with('tasks')->where('category_id')->get();
+//        });
+        $categories = Category::whereHas('tasks', function ($query){
+            $query->whereNotNull('category_id');
+        })->latest()->get();
         return CategoryResource::collection($categories);
     }
 
@@ -49,9 +57,17 @@ class CategoriesController extends Controller
             ], 400);
         }
 
-        $categoriesSaved = Category::register($categoriesNames);
+        if( Category::whereIn('slug', $categoriesNames)->exists() )
+        {
+            return response([
+                'status' => false,
+                'message' => 'One or more data already exists.'
+            ], 400);
+        } else {
+            $categoriesSaved = Category::register($categoriesNames);
 
-        return CategoryResource::collection($categoriesSaved);
+            return CategoryResource::collection($categoriesSaved);
+        }
     }
 
     public function show(Category $category)

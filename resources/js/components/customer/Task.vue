@@ -76,6 +76,6 @@ export default {
     }
   }
   .ql-editor {
-    @apply p-0 #{!important}
+    @apply p-0 min-h-0 #{!important}
   }
 </style>

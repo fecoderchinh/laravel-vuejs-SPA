@@ -15,7 +15,10 @@
         <h3 class="text-2xl my-5">
           {{ $t('comments') }}
         </h3>
-        <CommentForm :data="user" @submit="addComment" />
+        <CommentForm v-if="user" :data="user" @submit="addComment" />
+        <router-link v-else :to="{ name: 'login' }" class="tc-button tc-button__fill tc-button__primary">
+          {{ $t('comments') }}
+        </router-link>
         <Comment v-for="comment in task.comments" :key="comment.id" :data="comment" @delete="removeComment(comment)" />
       </box>
     </div>
@@ -44,12 +47,13 @@ export default {
     return {
       task: {},
       endpoint: TASKS,
-      loading: false
+      loading: false,
+      userData: {}
     }
   },
   computed: {
     user () {
-      return this.$store.getters['auth/user']
+      return this.$store.getters['auth/check']
     }
   },
   watch: {

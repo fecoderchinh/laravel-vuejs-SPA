@@ -1,4 +1,5 @@
 export const CATEGORIES = '/api/categories'
+export const CATEGORIES_ALL = '/api/categories/all'
 export const STATS = '/api/statistics'
 export const TASKS = '/api/tasks'
 export const TASKS_ALL = '/api/tasks/all'

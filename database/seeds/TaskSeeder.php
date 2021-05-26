@@ -26,7 +26,7 @@ class TaskSeeder extends Seeder
 
         for ($i = 0; $i < 20; $i++) {
 
-            $category = Category::find(random_int(1, 5));
+            $category = Category::find(random_int(2, 5));
 
             $title = $faker->sentence("5");
 
@@ -34,7 +34,7 @@ class TaskSeeder extends Seeder
                 "title" => $title,
                 "slug"  => Str::slug($title),
                 "content"  => $faker->text,
-                "category_id" => random_int(1, 5),
+                "category_id" => random_int(2, 5),
                 "user_id" => User::factory()->create()->id,
                 "online" => (bool) random_int(0, 1),
                 "cover_path" => $cover_path,

@@ -157,7 +157,7 @@ export default {
       }
     },
     handleBack () {
-      if (!this.fromRoute.name) {
+      if (!this.fromRoute.name || this.fromRoute.name === 'login') {
         // this.$router.push(fallback)
         this.redirect()
       } else {
