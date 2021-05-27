@@ -50,7 +50,7 @@ import Tasks from '~/components/customer/Tasks'
 import { mapGetters } from 'vuex'
 import Pagination from '~/components/Pagination'
 import tasks from '~/utils/requests'
-import { TASKS_ALL } from '~/utils/endpoints'
+import { TASKS } from '~/utils/endpoints'
 
 export default {
   components: {
@@ -98,10 +98,10 @@ export default {
         })
     },
     getEndpoint (popular = null) {
-      return popular !== null ? `${TASKS_ALL}?popular=1` : TASKS_ALL
+      return popular !== null ? `${TASKS}?popular=1` : TASKS
     },
     paginate (page) {
-      let endpoint = `${TASKS_ALL}?page=${page}`
+      let endpoint = `${TASKS}?page=${page}`
       this.fetchTasks(endpoint)
     }
   }

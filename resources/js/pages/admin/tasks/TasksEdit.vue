@@ -78,6 +78,8 @@ import { TASKS, CATEGORIES } from '~/utils/endpoints'
 import { mapGetters } from 'vuex'
 import axios from 'axios'
 
+import helpers from '~/utils/helpers'
+
 export default {
   name: 'TasksEdit',
   middleware: ['auth'],
@@ -106,7 +108,10 @@ export default {
   computed: {
     ...mapGetters({
       categories: 'categories/categories'
-    })
+    }),
+    user () {
+      return this.$store.getters['auth/user']
+    }
   },
   created () {
     this.fetchCategories(`${CATEGORIES}/all`)
@@ -134,7 +139,13 @@ export default {
       tasks.find(TASKS, id)
         .then((res) => {
           this.task = res.data.data
-          this.setForm(this.task)
+          // console.log(this.task.creator.id)
+          // console.log(this.user.data.id)
+          if (helpers.is('admin') || this.user.data.id === this.task.creator.id) {
+            this.setForm(this.task)
+          } else {
+            this.$router.back()
+          }
         })
         .catch(error => this.$store.dispatch('alert/alert', { message: 'An error occured', type: 'danger' }))
     },
