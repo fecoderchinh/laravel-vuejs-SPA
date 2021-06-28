@@ -33,13 +33,21 @@ class PasswordController extends Controller
             'confirm_password' => 'required|same:new_password'
         ];
 
+        $user = $request->user();
+
         $this->validate($request, $rules);
 
-        $user = $request->user();
-        $user->password = bcrypt($request->input('new_password'));
-        $user->saveOrFail();
+        if (\Hash::check($request->password, $user->password)) {
+            $user->password = bcrypt($request->input('new_password'));
+            $user->saveOrFail();
+        } else {
+            return response([
+                'status' => false,
+                'message' => 'Old password is incorrect.'
+            ], 400);
+        }
 
 //        return response()->json(compact('user'));
-        return response()->json(null, 204);
+//        return response()->json(null, 204);
     }
 }
